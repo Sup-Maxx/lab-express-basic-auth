@@ -8,6 +8,8 @@ router.get("/signup", (req,res) => {
 router.post("/signup", (req,res) => {
     console.log(req.body)
     const {username, password} = req.body
+
+    .then((user) => console.log(user))
     res.redirect("/profile")
 })
 
