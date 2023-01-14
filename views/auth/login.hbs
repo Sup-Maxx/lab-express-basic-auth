@@ -1,0 +1,23 @@
+<div id="form">
+  <h2>Login</h2>
+ 
+  <form action="/login" method="POST">
+ 
+    <label> Email
+      <input type="email" name="email" placeholder="Your e-mail here" />
+    </label>
+ 
+    <label>Password
+      <input type="password" name="password" placeholder="Password" />
+    </label>
+ 
+    <button type="submit">Login</button>
+    <br>
+    <br>
+    <img src="https://media0.giphy.com/media/ICOgUNjpvO0PC/200.webp?cid=ecf05e47iqmu9mlhgidl1pv5u763g7psvdkx6hq89g3l92tf&rid=200.webp&ct=g" alt="">
+ 
+    {{#if errorMessage}}
+      <p class="error">{{errorMessage}}</p>
+    {{/if}}
+  </form>
+</div>

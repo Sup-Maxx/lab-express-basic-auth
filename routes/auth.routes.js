@@ -1,10 +1,14 @@
 const router = require("express").Router()
+const mongoose = require("mongoose")
 const bcrypt = require("bcryptjs")
+
 saltRounds = 10
 
 const User = require("../models/user.model")
+const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 
-router.get("/signup", (req,res) => {
+//signup GET and POST
+router.get("/signup", isLoggedOut, (req,res) => {
     res.render("auth/signup")
 })
 
@@ -26,6 +30,23 @@ router.post("/signup", (req,res) => {
     })
     res.redirect("/profile")
 })
+})
+
+//login GET and POST
+router.get("/login", (req,res) => {
+    res.render("auth/login")
+})
+
+router.post("/login", (req,res) => {
+    const {email, password} = req.body
+
+    User.findOne({email})
+    .then(user => {
+        console.log(user)
+        if(bcrypt.compareSync(password, user.passwordHash)) {
+            res.redirect("/profile")
+        }
+    })
 })
 
 router.get("/profile", (req,res) => {
